@@ -1,0 +1,46 @@
+@using Ecommerce.Models
+@model Product
+
+<h2 style="text-align: center;">
+    <a href="/">Dashboard</a> |
+    Products |
+    <a href="/orders">Orders</a> |
+    <a href="/customers">Customers</a>
+</h2>
+
+<u><h4>Add a new product</h4></u>
+
+<form asp-action="CreateProduct" asp-controller="Home" method="post">
+    <div class="form-group">
+        <span style="color: red;" asp-validation-for="Name"></span>
+        <label asp-for="Name" for="exampleInputEmail1">Product Name:</label>
+        <input asp-for="Name" type="text" placeholder="Enter name">
+    </div>
+    <div class="form-group">
+        <span style="color: red;" asp-validation-for="Image"></span>
+        <label asp-for="Image" for="exampleInputEmail1">Image (url):</label>
+        <input asp-for="Image" type="text" placeholder="Enter url">
+    </div>
+    <div class="form-group">
+        <span style="color: red;" asp-validation-for="Description"></span>
+        <label asp-for="Description" for="exampleFormControlTextarea1">Description:</label>
+        <textarea asp-for="Description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <span style="color: red;" asp-validation-for="Quantity"></span>
+        <label asp-for="Quantity" for="exampleInputEmail1">Initial Quantity:</label>
+        <input asp-for="Quantity" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter quantity">
+    </div>
+    <p class="text-left"><button type="submit" class="btn btn-primary">Create</button></p>
+</form>
+
+<div style="text-align: center border: 2px solid red;">
+    @foreach (var p in ViewBag.AllProducts)
+    {
+        <div style="text-align: center; border: 2px solid black; width: 45%; padding: 5px; display: inline-block;">
+            <img style="width: 30%;" src="@p.Image" alt="Picture of @p.Name">
+            <h3>@p.Name</h3>
+            <h3>(@p.Quantity left)</h3>
+        </div>
+    }
+</div>

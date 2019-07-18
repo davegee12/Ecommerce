@@ -1,0 +1,33 @@
+﻿<h2 style="text-align: center;">
+    Dashboard |
+    <a href="/products">Products</a> |
+    <a href="/orders">Orders</a> |
+    <a href="/customers">Customers</a>
+</h2>
+
+@foreach (var p in ViewBag.AllProducts)
+{
+    <div style="text-align: center; border: 2px solid black; width: 15%; padding: 5px; display: inline-block;">
+        <img style="width: 30%;" src="@p.Image" alt="Picture of @p.Name">
+        <h3>@p.Name</h3>
+        <h3>(@p.Quantity left)</h3>
+    </div>
+}
+
+<a href="/products" style="text-align: center;">See more...</a>
+
+<u><h3 style="text-align:center">Recent Orders</h3></u>
+@foreach (var o in ViewBag.AllOrders)
+{
+    <h4 style="text=align: center">@o.Customer.Name purchased @o.ItemPurchased.Quantity @o.ItemPurchased.Name...</h4>
+}
+
+<a href="/orders" style="text-align: center;">See more...</a>
+
+<u><h3 style="text-align:center">New Customers</h3></u>
+@foreach (var c in ViewBag.AllUsers)
+{
+    <h4 style="text=align: center">@c.Name joined the store...</h4>
+}
+
+<a href="/customers" style="text-align: center;">See more...</a>

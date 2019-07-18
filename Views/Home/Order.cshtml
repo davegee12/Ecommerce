@@ -1,0 +1,62 @@
+@using Ecommerce.Models
+@model Order
+
+<h2 style="text-align: center;">
+    <a href="/">Dashboard</a> |
+    <a href="/products">Products</a> |
+    Orders |
+    <a href="/customers">Customers</a>
+</h2>
+
+<u><h4>Add a new customer</h4></u>
+
+<form asp-action="CreateOrder" asp-controller="Home" method="post">
+    <div class="form-group">
+        <span style="color: red;" asp-validation-for="UserId"></span>
+        <label asp-for="UserId" for="exampleFormControlSelect1">Customer:</label>
+        <select asp-for="UserId" class="form-control" id="exampleFormControlSelect1">
+            @foreach (var c in ViewBag.AllUsers)
+            {
+                <option value="@c.UserId">@c.Name</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <span style="color: red;" asp-validation-for="ProductId"></span>
+        <label asp-for="ProductId" for="exampleFormControlSelect1">Product:</label>
+        <select asp-for="ProductId" class="form-control" id="exampleFormControlSelect1">
+            @foreach (var p in ViewBag.AllProducts)
+            {
+                <option value="@p.ProductId">@p.Name - Current Stock: @p.Quantity</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <span style="color: red;" asp-validation-for="Quantity"></span>
+        <label asp-for="Quantity" for="exampleInputEmail1">Order:</label>
+        <input asp-for="Quantity" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter quantity">
+    </div>
+    <p class="text-left"><button type="submit" class="btn btn-primary">Place Order</button></p>
+</form>
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+        <th scope="col">Customer Name</th>
+        <th scope="col">Product</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Created Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in ViewBag.AllOrders)
+        {
+            <tr>
+            <td>@s.Customer.Name</td>
+            <td>@s.ItemPurchased.Name</td>
+            <td>@s.Quantity</td>
+            <td>@s.CreatedAt</td>
+            </tr>
+        }
+    </tbody>
+</table>

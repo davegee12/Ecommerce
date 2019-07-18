@@ -1,0 +1,40 @@
+@using Ecommerce.Models
+@model User
+
+<h2 style="text-align: center;">
+    <a href="/">Dashboard</a> |
+    <a href="/products">Products</a> |
+    <a href="/orders">Orders</a> |
+    Customers
+</h2>
+
+<u><h4>Add a new customer</h4></u>
+
+<form asp-action="CreateUser" asp-controller="Home" method="post">
+    <div class="form-group">
+        <span style="color: red;" asp-validation-for="Name"></span>
+        <label asp-for="Name" for="exampleInputEmail1">Customer Name:</label>
+        <input asp-for="Name" type="text" placeholder="Enter name">
+    </div>
+    <p class="text-left"><button type="submit" class="btn btn-primary">Add</button></p>
+</form>
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Created Date</th>
+        <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in ViewBag.AllUsers)
+        {
+            <tr>
+            <td>@u.Name</td>
+            <td>@u.CreatedAt</td>
+            <td> <a href="/customer/@u.UserId/delete"><button class="btn btn-primary">Remove</button></a> </td>
+            </tr>
+        }
+    </tbody>
+</table>
